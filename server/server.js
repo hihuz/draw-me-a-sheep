@@ -17,7 +17,7 @@ const messages = new Array(4).fill(
     })
   )
 );
-const chatRoom = CreateChatRoom({ id, name });
+const chatRoom = CreateChatRoom({ id, name, messages });
 
 // messages here is not good :D Not sure yet about the  List type
 const schema = buildSchema(
