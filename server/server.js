@@ -7,25 +7,26 @@ const CreateMessage = require("./chat/CreateMessage");
 const id = 0;
 const name = "Chat about marmots";
 // init with some random messages
-const messages = new Array(4).fill(
-  undefined.map((_, i) =>
-    CreateMessage({
-      id: i,
-      time: new Date().getTime,
-      author: i,
-      text: "foo"
-    })
-  )
+const messages = new Array(4).fill(undefined).map((_, i) =>
+  CreateMessage({
+    id: i,
+    time: new Date().getTime,
+    author: i,
+    text: "foo"
+  })
 );
 const chatRoom = CreateChatRoom({ id, name, messages });
 
-// messages here is not good :D Not sure yet about the  List type
 const schema = buildSchema(
   `
   type Query {
-    messages: List
+    messages: [Message]
+  }
+  type Message {
+    time: Int
     id: Int
-    name: String
+    author: String
+    text: String
   }
 `
 );
