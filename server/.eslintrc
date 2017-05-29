@@ -6,8 +6,5 @@
   "extends": [
     "airbnb",
     "prettier"
-  ],
-  "plugins": [
-    "import"
-  ],
+  ]
 }
