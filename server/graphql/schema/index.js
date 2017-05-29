@@ -76,9 +76,7 @@ const rootQueryType = new GraphQLObjectType({
       //     type: GraphQLInt
       //   }
       // },
-      resolve: () => {
-        return getChatRooms();
-      }
+      resolve: getChatRooms
     },
     users: {
       type: new GraphQLList(userType),
@@ -88,9 +86,7 @@ const rootQueryType = new GraphQLObjectType({
       //       type: GraphQLInt
       //     }
       //   },
-      resolve: () => {
-        return getUsers();
-      }
+      resolve: getUsers
     }
   })
 });
