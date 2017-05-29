@@ -6,8 +6,7 @@ const {
   GraphQLInt,
   GraphQLBoolean
 } = require("graphql");
-const chatRooms = require("../../chat");
-const CreateUser = require("../../users/CreateUser");
+const { getChatRooms, getUsers } = require("../resolvers");
 
 const messageType = new GraphQLObjectType({
   name: "Message",
@@ -78,7 +77,7 @@ const rootQueryType = new GraphQLObjectType({
       //   }
       // },
       resolve: () => {
-        return chatRooms;
+        return getChatRooms();
       }
     },
     users: {
@@ -90,7 +89,7 @@ const rootQueryType = new GraphQLObjectType({
       //     }
       //   },
       resolve: () => {
-        return [];
+        return getUsers();
       }
     }
   })
