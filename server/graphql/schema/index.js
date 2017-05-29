@@ -6,15 +6,8 @@ const {
   GraphQLInt,
   GraphQLBoolean
 } = require("graphql");
-const CreateChatRoom = require("../chat/CreateChatRoom");
-const CreateMessage = require("../chat/CreateMessage");
-
-const id = 0;
-const name = "Chat about marmots";
-
-const chatRoom = CreateChatRoom({ id, name });
-
-const chatRooms = [chatRoom];
+const chatRooms = require("../../chat");
+const CreateUser = require("../../users/CreateUser");
 
 const messageType = new GraphQLObjectType({
   name: "Message",
@@ -73,46 +66,34 @@ const userType = new GraphQLObjectType({
   })
 });
 
-// const rootQueryType = new GraphQLObjectType({
-//   name: "RootQueryType",
-//   fields: () => ({
-//     rooms: {
-//       type: new GraphQLList(roomType),
-//       args: {
-//         id: {
-//           name: "id",
-//           type: GraphQLInt
-//         }
-//       },
-//       resolve: () => {
-//         return chatRooms;
-//       }
-//     },
-//     users: {
-//       type: new GraphQLList(userType),
-//       args: {
-//         id: {
-//           name: "id",
-//           type: GraphQLInt
-//         }
-//       },
-//       resolve: () => {
-//         return "users, add later";
-//       }
-//     }
-//   })
-// });
-
 const rootQueryType = new GraphQLObjectType({
-  name: "RootQuery",
-  fields: {
+  name: "RootQueryType",
+  fields: () => ({
     rooms: {
-      type: GraphQLString,
+      type: new GraphQLList(roomType),
+      // args: {
+      //   id: {
+      //     name: "id",
+      //     type: GraphQLInt
+      //   }
+      // },
       resolve: () => {
-        return "foo";
+        return chatRooms;
+      }
+    },
+    users: {
+      type: new GraphQLList(userType),
+      //   args: {
+      //     id: {
+      //       name: "id",
+      //       type: GraphQLInt
+      //     }
+      //   },
+      resolve: () => {
+        return [];
       }
     }
-  }
+  })
 });
 
 const schema = new GraphQLSchema({
