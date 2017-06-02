@@ -70,22 +70,10 @@ const rootQueryType = new GraphQLObjectType({
   fields: () => ({
     rooms: {
       type: new GraphQLList(roomType),
-      // args: {
-      //   id: {
-      //     name: "id",
-      //     type: GraphQLInt
-      //   }
-      // },
       resolve: getChatRooms
     },
     users: {
       type: new GraphQLList(userType),
-      //   args: {
-      //     id: {
-      //       name: "id",
-      //       type: GraphQLInt
-      //     }
-      //   },
       resolve: getUsers
     }
   })
